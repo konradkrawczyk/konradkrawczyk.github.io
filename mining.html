@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>News Text Mining</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style type="text/css">
+      .container {
+        max-width: 50%;
+        padding-top: 100px;
+      }
+    </style>
+  </head>
+  <body>
+
+
+<!-- Static navbar -->
+      <div class="navbar navbar-default">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">News Text Mining</a>
+        </div>
+        <div class="navbar-collapse collapse">
+         
+          <ul class="nav navbar-nav navbar-right">
+            <li ><a href="#about">About the data.</a></li>
+            <li ><a href="#download">Download data.</a></li>
+            <li ><a href="#datacontent">Data documentation.</a></li>
+            <li ><a href="#contact">Contact.</a></li>
+           
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    
+       <main role="main" class="container">
+
+      
+      <h1 id ='about' class="mt-5">Front-page news for text mining.</h1>
+      <p class="lead">Here we make avaliable the result of text mining front pages of majour online news outlets. We collected front-pages from 172 outlets in 11 countries summarized in the table below. We extracted news article content from links appearing on each of the front pages. The articles were retrieved for the period 2015-2020 and currently encompass ca. 26 million articles.</p>
+	
+
+	<hr>
+
+      <h1 id ='download' class="mt-5">Data availability.</h1>
+	<p class="lead">The data are available for download in either the raw or processed form as described below and the relationship between illustrated in Figure 1. 
+
+	<ul>
+		<li class = "lead"><b>Raw Front Pages</b> The raw front pages as obtained from webarchive. Download all pages <a href="">here</a> and the documentation can be found here.</li>
+		<li class = "lead"><b>Raw Individual Pages</b> The raw individual pages obtained from links in each page. Download all data <a href="">here</a> and the documentation can be found here.</li>
+		<li class = "lead"><b>Processed Pages</b> The collection of information extracted from individual pages on each front page, sorted per-day. Download data <a href="">here</a> and the documentation can be found here.</li>
+	</ul>
+</p>
+
+     <center><img src="static/img/websitefig.png" style ="width:80%;height:auto;"></center>
+	<center><p>Figure 1. Relation between the raw and processed file formats.</p></center>
+      <h1 class="mt-5">Raw Front Pages data format.</h1>
+	<p class="lead">Upon downloading and uncompressing the archive containing raw front pages, you will see that the data is split between differeng outlets (e.g.<code>nytimes.com</code> ). Within each of those folders are WebArchive timestamps (e.g. <code>nytimes.com/20201105050723</code>). The timestamp is a folder containing the front page html captured at that specific points. For most of the pages the timestamp folder will contain the index file of the domain's landing page (<code>nytimes.com/20201105050723/index.html</code>). There are exception to this and sometimes you will notice subfolders before encountering the landing page's index file (e.g. <code>dailymail.co.uk/20201105211235/home/index.html</code>)</p>
+	</p>
+       <h1 id ='datacontent' class="mt-5">Raw Individual Pages data format.</h1>
+	<p class="lead">Upon downloading and uncompressing the archive containing raw front pages, you will see that the data is split between different outlets (e.g.<code>edition.cnn.com</code>). Within each of those outlets the individual front pages are sorted between folders with three-character codes (data/raw_pages/edition.cnn.com/ffd/). The three-character folder names are derived from the three first letters of the hash of an articles link. Within each folder you can find archived versions of individual pages with filenames corresponding to their hashed links (<code>edition.cnn.com/ffd/ffdf624aa94cbde4da8eb1591575940b.gz </code>).
+	</p>
+	<h1 class="mt-5">Processed frontpage data format.</h1>
+	<p class="lead">This data should have everything fairly cleaned up - structural and malformed links removed leaving (mostly) news articles/news like items. This does not mean that the articles are 100% error free. The collection of such 'news' items rather well reflects the heterogeneity of the news forms available on contemporary online news sites.</p>
+	<p class="lead">
+Each outlet is sorted into a folder by its domain. Within the folder there is another folder called per_day. Here there are collections of articles from a given outlet sorted by dates, indicated by file name. For instance <code>20170915.gz</code> means 15.09.2017.</p>
+	<pre>
+foxnews.com/days.tar.gz->
+           ./per_day
+                    ./20170915.gz
+                    ./20170415.gz
+                    ./...
+           
+bbc.com/days.tar.gz->
+          ./per_day
+                   ./20170215.gz
+                   ./20150912.gz
+                   ...
+	</pre>
+	Each day has a jsonified dictionary holding articles from that day in the following format:
+
+	<pre>
+_id -> {
+	'title':'',#Raw title
+	'title_stem1':'',#raw keywords stem for title
+	'title_stem2':'',#2-gram stem for title - English stopwords removed.
+	'description':'',#Raw description
+	'description_stem':'',#raw keywords stem for description
+	'description_stem2':'',#2-gram stem for description - English stopwords removed.
+	'link':'',#link of the news item
+	'sentiment':'',#Annotated vader sentiment of raw title + description
+	'is_covid':'',#Identification whether we are a covid topic
+}
+
+	</pre>
+
+
+	</p>
+	<hr>
+
+
+
+
+
+	  <h1 id ='contact' class="mt-5">Contact.</h1>
+	<p class="lead">In case of any queries please contact Konrad Krawczyk, <code>konradk@imada.sdu.dk</code></p>
+
+    </main>
+   </body>
+
+
+ <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  
+</html>
